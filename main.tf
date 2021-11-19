@@ -103,18 +103,18 @@ module "google_networks" {
 }
 
 
-module "google_kubernetes_cluster_app" {
-  source = "./gke_application"
+# module "google_kubernetes_cluster_app" {
+#   source = "./gke_application"
 
-  location                   = "us-central1-a"
-  network                    = module.google_networks.vpc_name
-  subnet_name                = module.google_networks.subnet_name[0]
-  ip_range_pods              = module.google_networks.cluster_pods_ip_cidr_range
-  ip_range_services          = module.google_networks.cluster_services_ip_cidr_range
-  master_ipv4_cidr_block     = module.google_networks.cluster_master_ip_cidr_range
-  authorized_ipv4_cidr_block = "${module.bastion.ip}/32"
-  tags                       = ["application"]
-}
+#   location                   = "us-central1-a"
+#   network                    = module.google_networks.vpc_name
+#   subnet_name                = module.google_networks.subnet_name[0]
+#   ip_range_pods              = module.google_networks.cluster_pods_ip_cidr_range
+#   ip_range_services          = module.google_networks.cluster_services_ip_cidr_range
+#   master_ipv4_cidr_block     = module.google_networks.cluster_master_ip_cidr_range
+#   authorized_ipv4_cidr_block = "${module.bastion.ip}/32"
+#   tags                       = ["application"]
+# }
 
 module "google_kubernetes_cluster_db" {
   source = "./gke_database"
