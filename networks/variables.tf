@@ -81,5 +81,5 @@ variable "firewall_rules" {
 #========================== ROUTERS ==================================
 
 variable "nat_subnet_name" {
-  type = list(string)
+  type = string
 }

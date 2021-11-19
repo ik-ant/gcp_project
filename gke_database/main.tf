@@ -108,6 +108,10 @@ resource "google_container_node_pool" "preview_deploys_db" {
 
     tags = var.tags
   }
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = [node_config]
+  }
 
   
 

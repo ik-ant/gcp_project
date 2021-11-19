@@ -1,22 +1,22 @@
-// Write to "default" the project name where the resource will be created
+// Write to "default" the project name where the resource will created
 variable "project_id" {
   type    = string
-  default = "playground-s-11-dbcf4037"
+  default = "playground-s-11-d801f87d"
 }
 
 // Write to "default" the path to your credentials file
 variable "credentials_file_path" {
   type    = string
-  default = "playground-s-11-dbcf4037-29afd1ba0f2e.json"
+  default = "playground-s-11-d801f87d-4468caeb3864.json"
 }
 
-// Write to "default" the region where by default your resource will be created
+// Write to "default" the region where by default your resource will created
 variable "region" {
   type    = string
   default = "us-central1"
 }
 
-// Write to "default" the zone where by default your resource will be created
+// Write to "default" the zone where by default your resource will will created
 variable "main_zone" {
   type    = string
   default = "us-central1-b"

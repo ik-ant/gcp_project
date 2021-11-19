@@ -22,7 +22,7 @@ provider "google" {
 module "google_networks" {
   source = "./networks"
 
-  nat_subnet_name = ["presentation-subnet","application-subnet"]
+  nat_subnet_name = "application-subnet"
 
   #==========================SUBNETS=============================
   subnets = [
@@ -98,7 +98,7 @@ module "google_networks" {
         ports    = null
       }]
       deny = []
-    },
+    }
   ]
 }
 
@@ -112,7 +112,7 @@ module "google_kubernetes_cluster_app" {
   ip_range_pods              = module.google_networks.cluster_pods_ip_cidr_range
   ip_range_services          = module.google_networks.cluster_services_ip_cidr_range
   master_ipv4_cidr_block     = module.google_networks.cluster_master_ip_cidr_range
-  authorized_ipv4_cidr_block = "${module.bastion_app.ip}/32"
+  authorized_ipv4_cidr_block = "${module.bastion.ip}/32"
   tags                       = ["application"]
 }
 
@@ -125,28 +125,17 @@ module "google_kubernetes_cluster_db" {
   ip_range_pods              = module.google_networks.cluster_pods_ip_cidr_range_db
   ip_range_services          = module.google_networks.cluster_services_ip_cidr_range_db
   master_ipv4_cidr_block     = module.google_networks.cluster_master_ip_cidr_range_db
-  authorized_ipv4_cidr_block = "${module.bastion_db.ip}/32"
+  authorized_ipv4_cidr_block = "${module.bastion.ip}/32"
   tags                       = ["database"]
 }
 
-module "bastion_app" {
-  source = "./bastion_app"
+module "bastion" {
+  source = "./bastion"
 
   region       = var.region
   project_id   = var.project_id
   zone         = var.main_zone
   bastion_name = "app-cluster"
-  vpc_name     = module.google_networks.vpc_name
-  subnet_name  = module.google_networks.subnet_name[2]
-}
-
-module "bastion_db" {
-  source = "./bastion_db"
-
-  region       = var.region
-  project_id   = var.project_id
-  zone         = var.main_zone
-  bastion_name = "db-cluster"
   vpc_name     = module.google_networks.vpc_name
   subnet_name  = module.google_networks.subnet_name[2]
 }

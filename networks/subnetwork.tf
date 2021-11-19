@@ -16,11 +16,9 @@ resource "google_compute_subnetwork" "subnets" {
           : []
       )) :
       var.secondary_ranges[each.value.subnet_name][i]
-    ]
-    
+  ]
+
     lifecycle {
-      ignore_changes = [
-        secondary_ip_range
-      ]
+      ignore_changes = [secondary_ip_range]
     }
 }
